@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriConnect Kenya - Agricultural Marketplace</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1>AgriConnect Kenya</h1>
+        <p>Linking farmers to buyers nationwide</p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" id="home-link">Home</a></li>
+          <li><a href="#" id="products-link">Products</a></li>
+          <li><a href="#" id="sell-link">Sell</a></li>
+          <li><a href="#" id="about-link">About</a></li>
+          <li><a href="#" id="contact-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="auth-buttons">
+        <button id="login-btn">Login</button>
+        <button id="register-btn">Register</button>
+      </div>
+      <div class="user-menu hidden">
+        <span id="username-display"></span>
+        <i class="fas fa-user-circle"></i>
+        <div class="dropdown-menu">
+          <a href="#" id="profile-link">Profile</a>
+          <a href="#" id="orders-link">My Orders</a>
+          <a href="#" id="logout-link">Logout</a>
+        </div>
+      </div>
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h2>Connecting Kenyan Farmers to Buyers</h2>
+        <p>Buy and sell fresh agricultural produce directly from farmers across all 47 counties</p>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products...">
+          <select id="county-filter">
+            <option value="">All Counties</option>
+            <!-- Counties will be loaded dynamically -->
+          </select>
+          <select id="sub-county-filter">
+            <option value="">All Sub-Counties</option>
+            <!-- Sub-counties will be loaded dynamically -->
+          </select>
+          <button id="search-btn">Search</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+      <div class="container">
+        <h3>Featured Products</h3>
+        <div class="products-grid" id="featured-products">
+          <!-- Products will be loaded dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="categories">
+      <div class="container">
+        <h3>Browse by Category</h3>
+        <div class="categories-grid">
+          <div class="category-card" data-category="vegetables">
+            <img src="images/Vegetables.jpg" alt="Vegetables">
+            <h4>Vegetables</h4>
+          </div>
+          <div class="category-card" data-category="fruits">
+            <img src="images/Fruits.jpg" alt="Fruits">
+            <h4>Fruits</h4>
+          </div>
+          <div class="category-card" data-category="grains">
+            <img src="images/Grains.jpg" alt="Grains">
+            <h4>Grains</h4>
+          </div>
+          <div class="category-card" data-category="dairy">
+            <img src="images/Dairy3.jpg" alt="Dairy">
+            <h4>Dairy</h4>
+          </div>
+          <div class="category-card" data-category="poultry">
+            <img src="images/Poultry.jpg" alt="Poultry">
+            <h4>Poultry</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Login</h2>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" id="show-register">Register here</a></p>
+      </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="register-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Register</h2>
+        <form id="register-form">
+          <div class="form-group">
+            <label for="register-username">Username</label>
+            <input type="text" id="register-username" required>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" required>
+          </div>
+          <div class="form-group">
+            <label for="register-confirm-password">Confirm Password</label>
+            <input type="password" id="register-confirm-password" required>
+          </div>
+          <div class="form-group">
+            <label for="register-phone">Phone Number</label>
+            <input type="tel" id="register-phone" required>
+          </div>
+          <div class="form-group">
+            <label for="user-type">I am a:</label>
+            <select id="user-type" required>
+              <option value="">Select user type</option>
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller (Farmer/Producer)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="register-county">County</label>
+            <select id="register-county" required>
+              <option value="">Select County</option>
+              <!-- Counties will be loaded dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="register-sub-county">Sub-County</label>
+            <select id="register-sub-county" required>
+              <option value="">Select Sub-County</option>
+              <!-- Sub-counties will be loaded dynamically -->
+            </select>
+          </div>
+          <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" id="show-login">Login here</a></p>
+      </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div class="modal" id="product-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="product-details">
+          <div class="product-images">
+            <img id="product-main-image" src="" alt="Product Image">
+          </div>
+          <div class="product-info">
+            <h2 id="product-name"></h2>
+            <p class="product-seller" id="product-seller"></p>
+            <p class="product-location" id="product-location"></p>
+            <p class="product-price" id="product-price"></p>
+            <p class="product-description" id="product-description"></p>
+            <div class="product-quantity">
+              <label for="product-quantity">Quantity:</label>
+              <input type="number" id="product-quantity" min="1" value="1">
+              <span id="product-unit"></span>
+            </div>
+            <button id="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Your Cart</h2>
+        <div class="cart-items" id="cart-items">
+          <!-- Cart items will be loaded dynamically -->
+        </div>
+        <div class="cart-summary">
+          <h3>Total: <span id="cart-total">KSh 0.00</span></h3>
+          <button id="checkout-btn">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Checkout</h2>
+        <form id="checkout-form">
+          <div class="form-group">
+            <label for="delivery-county">Delivery County</label>
+            <select id="delivery-county" required>
+              <option value="">Select County</option>
+              <!-- Counties will be loaded dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="delivery-sub-county">Delivery Sub-County</label>
+            <select id="delivery-sub-county" required>
+              <option value="">Select Sub-County</option>
+              <!-- Sub-counties will be loaded dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="delivery-address">Delivery Address</label>
+            <textarea id="delivery-address" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="payment-method">Payment Method</label>
+            <select id="payment-method" required>
+              <option value="mpesa">M-Pesa</option>
+              <option value="cash">Cash on Delivery</option>
+            </select>
+          </div>
+          <button type="submit">Place Order</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Orders Modal -->
+    <div class="modal" id="orders-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>My Orders</h2>
+        <div class="orders-list" id="orders-list">
+          <!-- Orders will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Seller Dashboard Modal -->
+    <div class="modal" id="seller-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Seller Dashboard</h2>
+        <div class="seller-tabs">
+          <button class="tab-btn active" data-tab="seller-products">My Products</button>
+          <button class="tab-btn" data-tab="seller-orders">Orders</button>
+          <button class="tab-btn" data-tab="add-product">Add Product</button>
+        </div>
+        
+        <div class="tab-content active" id="seller-products">
+          <button id="add-new-product-btn">Add New Product</button>
+          <div class="products-grid" id="seller-products-grid">
+            <!-- Seller's products will be loaded dynamically -->
+          </div>
+        </div>
+        
+        <div class="tab-content" id="seller-orders">
+          <div class="orders-list" id="seller-orders-list">
+            <!-- Seller's orders will be loaded dynamically -->
+          </div>
+        </div>
+        
+        <div class="tab-content" id="add-product">
+          <form id="add-product-form">
+            <div class="form-group">
+              <label for="product-name">Product Name</label>
+              <input type="text" id="product-name" required>
+            </div>
+            <div class="form-group">
+              <label for="product-category">Category</label>
+              <select id="product-category" required>
+                <option value="">Select Category</option>
+                <option value="vegetables">Vegetables</option>
+                <option value="fruits">Fruits</option>
+                <option value="grains">Grains</option>
+                <option value="dairy">Dairy</option>
+                <option value="poultry">Poultry</option>
+                <option value="herbs">Herbs & Spices</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="product-description">Description</label>
+              <textarea id="product-description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="product-price">Price (KSh)</label>
+              <input type="number" id="product-price" min="1" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="product-quantity">Quantity</label>
+              <input type="number" id="product-quantity" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="product-unit">Unit</label>
+              <select id="product-unit" required>
+                <option value="kg">Kilogram (kg)</option>
+                <option value="g">Gram (g)</option>
+                <option value="l">Liter (l)</option>
+                <option value="ml">Milliliter (ml)</option>
+                <option value="piece">Piece</option>
+                <option value="dozen">Dozen</option>
+                <option value="crate">Crate</option>
+                <option value="bag">Bag</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="product-county">County</label>
+              <select id="product-county" required>
+                <option value="">Select County</option>
+                <!-- Counties will be loaded dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="product-sub-county">Sub-County</label>
+              <select id="product-sub-county" required>
+                <option value="">Select Sub-County</option>
+                <!-- Sub-counties will be loaded dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="product-image">Product Image</label>
+              <input type="file" id="product-image" accept="image/*">
+            </div>
+            <button type="submit">Add Product</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-section">
+        <h3>AgriConnect Kenya</h3>
+        <p>Connecting farmers to buyers across all 47 counties in Kenya</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Sell</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>Email: info@agriconnect.co.ke</p>
+        <p>Phone: +254 700 123456</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 AgriConnect Kenya. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
